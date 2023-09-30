@@ -1,0 +1,24 @@
+# 2023.09.25 Conclusion. 여기서는 "라우터" 기능만 하고,
+# "local", "dev", "prod", 즉, "local=로컬 컴퓨터=H2 DB", "dev=개발용 서버=MySQL", "prod=운영 서버=Oracle" 이렇게 구분하여,
+# .yml 파일을 관리한다.
+
+---
+server:
+    port: 8888
+
+--- # 정적 리소스에 변화가 있을 때 바로 반영한다.
+spring:
+    devtools:
+        livereload:
+          enabled: true
+
+--- # thymeleaf 참조 경로
+# thymeleaf에 대한 캐시를 남기지 않는다. cache=false 설정(운영시는 true)
+# templates 디렉토리에 파일이 있는지 없는지 체크, 없으면 에러를 발생시킨다.
+spring:
+    thymeleaf:
+        check-template-location: true
+        prefix: classpath:templates/
+        suffix: .html
+    cache: false
+
